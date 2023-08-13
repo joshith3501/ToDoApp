@@ -1,0 +1,76 @@
+
+
+.app-container {
+  margin:0;
+  min-width:100vw;
+  min-height:100vh;
+  display:flex;
+  background-color: var(--primary-clr);
+  flex-direction: column;
+  /* justify-content: center;
+  align-items:center; */
+  place-items:center;
+  
+}
+
+.main-heading { 
+  color: var(--clr-two);
+}
+
+.theme-toggler {
+  height:1rem;
+  width:3rem;
+  position:relative;
+  border-radius:2rem;
+  background-color:var(--primary-clr);
+}
+
+.theme-toggler::after {
+  content: '';
+  position:absolute;
+  left: 0;
+  top: 0;
+  border-radius:2rem;
+  height:0.5rem;
+  width:0.5rem;
+  background-color:var(--clr-two);
+}
+
+.add-form {
+  position: relative;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.add-input {
+  width:45rem;
+  padding:1rem;
+  font-size:1em;
+  border:none;  
+  border-radius:5rem;
+  background-color:var(--secondary-clr);
+  color: var(--clr-two);
+}
+
+.dark-mode .add-input {
+  color: var(--clr-primary);
+}
+
+.add-input:focus {
+  outline:none;
+}
+
+.add-submit {
+  position:absolute;
+  right:0;
+  font-size:1em;
+  padding:1rem 2rem;
+  background-color:var(--clr-two);
+  color: var(--secondary-clr);
+  border-radius:4rem;
+  border: none;
+}
+
+
+
