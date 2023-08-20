@@ -1,13 +1,17 @@
+import TodoProp from "./TodoProp";
 
-
-const ToDoList = () => {
-  return (
-    <div>
-      <ul>
-        <li>List generates here!</li>
-      </ul>
-    </div>
-  )
+interface Props {
+  todos: TodoProp[];
 }
 
-export default ToDoList
+const ToDoList = ({ todos }: Props) => {
+  return(
+    <section className="list-container">
+      {todos.map((todo) => (
+        <article className="list-element-container" key={todo.time}>{todo.task}</article>
+      ))}
+    </section>
+  );
+};
+
+export default ToDoList;

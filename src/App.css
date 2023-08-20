@@ -1,4 +1,15 @@
+.header {
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content: space-around;  
+}
 
+.theme-toggle-container {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .app-container {
   margin:0;
@@ -18,22 +29,36 @@
 }
 
 .theme-toggler {
-  height:1rem;
+  height:1.5rem;
   width:3rem;
   position:relative;
+  cursor: pointer;
   border-radius:2rem;
   background-color:var(--primary-clr);
+  border: 0.1rem solid var(--clr-two);
 }
 
 .theme-toggler::after {
   content: '';
   position:absolute;
-  left: 0;
-  top: 0;
+  transform: translateY(-50%);
   border-radius:2rem;
-  height:0.5rem;
-  width:0.5rem;
+  height:1.1rem;
+  width:1.1rem;
+  transition: transform 0.1s ease-in-out;
   background-color:var(--clr-two);
+}
+
+.dark-mode .theme-toggler {
+  background-color: var(--primary-clr);
+}
+/* 
+.theme-toggler:has(.dark-mode)::after {
+  transform: translate(-100%, -50%);
+  
+} */
+.dark-mode .theme-toggler::after {
+  transform: translate(-100%, -50%);
 }
 
 .add-form {
@@ -53,7 +78,7 @@
   color: var(--clr-two);
 }
 
-.dark-mode .add-input {
+.app-container:has(.dark-mode) .add-input {
   color: var(--clr-primary);
 }
 
@@ -70,6 +95,11 @@
   color: var(--secondary-clr);
   border-radius:4rem;
   border: none;
+  cursor:pointer;
+}
+
+.dark-mode .add-submit {
+  color:var(--primary-clr);
 }
 
 

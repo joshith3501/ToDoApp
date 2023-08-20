@@ -2,62 +2,58 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import InputField from "./components/InputField";
 import ToDoList from "./components/ToDoList";
-import { MdDarkMode, MdOutlineDarkMode} from "react-icons/md";
+import { MdOutlineDarkMode } from "react-icons/md";
+import { CiLight } from "react-icons/ci";
+
+interface TodoProp {
+  task: string;
+  time: number;
+  isDone: boolean;
+}
+
 function App() {
-
-  let modeObject = {
-    query: "app-container",
-    logo: "MdOutlineDarkMode"
-  }
-  let [mode, setMode] = useState(modeObject);
+  let [mode, setMode] = useState("app-container");
   let [theme, setTheme] = useState(false);
-
-
-  useEffect(() => {
-    let prev: any = localStorage.getItem("theme");
-    prev = JSON.parse(prev);
-    if (prev.logo === "MdDarkMode") {
-      setTheme(true);
-    } 
-  }, []);
+  let [todo, setTodo] = useState<string>("");
+  let [todos, setTodos] = useState<TodoProp[]>([]);
+  // let arr: (TodoProp | string)[];
 
   useEffect(() => {
     if (theme) {
-      modeObject = {...modeObject, query: "app-container dark-mode", logo: "MdDarkMode" }
-      setMode(modeObject);
-      localStorage.setItem("theme", JSON.stringify(modeObject));
+      setMode("app-container dark-mode");
     } else {
-      modeObject = {...modeObject, query: "app-container", logo: "MdOutlineDarkMode"}
-      setMode(modeObject);
-      localStorage.setItem("theme", JSON.stringify(modeObject));
+      setMode("app-container");
     }
   }, [theme]);
 
   const handleThemeClick = () => {
     setTheme(!theme);
-    console.log("clicked");
-    if (theme) {
-      modeObject = {...modeObject, query: "app-container dark-mode", logo: "MdDarkMode" }
-      setMode(modeObject);
-      localStorage.setItem("theme", JSON.stringify(modeObject));
-    } else {
-      
-      modeObject = {...modeObject, query: "app-container", logo: "MdOutlineDarkMode"}
-      setMode(modeObject);
-      localStorage.setItem("theme", JSON.stringify(modeObject));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if(todo === "") {
+      console.log("no value entered");
+    }else {
+      setTodos([...todos, { task:todo, time: Date.now(), isDone: false }]);
+      setTodo("");
     }
   };
 
   return (
-    <div className={mode.query}>
+    <div className={mode}>
       <div className="header">
         <h1 className="main-heading">Let's pile up those Tasks!</h1>
-        <button className="theme-toggler" onClick={handleThemeClick}>
-          <div className="switch"></div>
-        </button>
+        <div className="theme-toggle-container">
+          <MdOutlineDarkMode />
+          <button className="theme-toggler" onClick={handleThemeClick}>
+            <div className="switch"></div>
+          </button>
+          <CiLight />
+        </div>
       </div>
-      <InputField />
-      <ToDoList />
+      <InputField setTodo={setTodo} onSubmit={handleSubmit} />
+      <ToDoList todos={todos} />
     </div>
   );
 }

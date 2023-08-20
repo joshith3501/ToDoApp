@@ -91,6 +91,11 @@ button:focus-visible {
   }
 } */
 
+
+li {
+  color: black;
+}
+
 @media screen and (max-width:375px) {
   body{
     min-width:378px;
