@@ -14,6 +14,7 @@ interface TodoProp {
 function App() {
   let [mode, setMode] = useState("app-container");
   let [theme, setTheme] = useState(false);
+  let [color, setColor] = useState("black");
   let [todo, setTodo] = useState<string>("");
   let [todos, setTodos] = useState<TodoProp[]>([]);
   // let arr: (TodoProp | string)[];
@@ -21,8 +22,10 @@ function App() {
   useEffect(() => {
     if (theme) {
       setMode("app-container dark-mode");
+      setColor("beige")
     } else {
       setMode("app-container");
+      setColor("black");
     }
   }, [theme]);
 
@@ -32,10 +35,10 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if(todo === "") {
+    if (todo === "") {
       console.log("no value entered");
-    }else {
-      setTodos([...todos, { task:todo, time: Date.now(), isDone: false }]);
+    } else {
+      setTodos([...todos, { task: todo, time: Date.now(), isDone: false }]);
       setTodo("");
     }
   };
@@ -45,15 +48,15 @@ function App() {
       <div className="header">
         <h1 className="main-heading">Let's pile up those Tasks!</h1>
         <div className="theme-toggle-container">
-          <MdOutlineDarkMode />
+          <MdOutlineDarkMode color={color}/>
           <button className="theme-toggler" onClick={handleThemeClick}>
             <div className="switch"></div>
           </button>
-          <CiLight />
+          <CiLight color={color}/>
         </div>
       </div>
       <InputField setTodo={setTodo} onSubmit={handleSubmit} />
-      <ToDoList todos={todos} />
+      <ToDoList todos={todos} setTodos={setTodos}/>
     </div>
   );
 }
