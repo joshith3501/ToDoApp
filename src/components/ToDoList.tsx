@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TodoProp from "./TodoProp";
 import { MdOutlineDone, MdEditDocument, MdOutlineDelete } from "react-icons/md";
 interface Props {
@@ -6,26 +7,24 @@ interface Props {
 }
 
 const ToDoList = ({ todos, setTodos }: Props) => {
-  const handleComplete = (
-    e: number
-  ) => {
-    console.log(e);
+  const [isEdit, setIsEdit] = useState(false);
+  const [value, setValue] = useState("");
+
+  const handleComplete = (e: number) => {
     let modifierTodo = todos.map((todo) => {
-      if(todo.time === e) {
-        if(todo.isDone) {
+      if (todo.time === e) {
+        if (todo.isDone) {
           return { ...todo, isDone: false };
         }
-        return { ...todo, isDone: true};
+        return { ...todo, isDone: true };
       }
       return todo;
-    }
-  );
-  setTodos(modifierTodo);
-  }
+    });
+    setTodos(modifierTodo);
+  };
 
-  const handleEdit = (e: boolean) => {
-    console.log(e);
-    console.log("edit clicked");
+  const handleEdit = (e: number) => {
+    setIsEdit(true);
   };
 
   const handleDelete = (e: number) => {
@@ -33,15 +32,48 @@ const ToDoList = ({ todos, setTodos }: Props) => {
     setTodos(modifierTodo);
   };
 
+  const handleFormSubmit = (e: number) => {
+
+    let modifierTodo = todos.map((todo) => {
+      if (todo.time === e) {
+          todo = { ...todo, task: `${value}` };
+      }
+      return todo;
+    });
+    setTodos(modifierTodo);
+  };
+
   return (
     <section className="list-container">
       {todos.map((todo, index) => (
         <article className="list-element-container" key={todo.time}>
-          <span className="element-description">{todo.task}</span>
+          <div className="element-description">
+            {isEdit ? (
+              <form
+                className="edit-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleFormSubmit(todo.time);
+                  setIsEdit(false);
+                }}
+              >
+                <input
+                  defaultValue={todo.task}
+                  className="edit-form-input"
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
+                ></input>
+                <button className="edit-form-submit" type="submit">done</button>
+              </form>
+            ) : (
+              <span>{todo.task}</span>
+            )}
+          </div>
           <aside className="element-state-container">
             <button
               className="element-state-modifier task-completed"
-              onClick={(e) => {
+              onClick={() => {
                 handleComplete(todo.time);
               }}
             >
@@ -49,15 +81,15 @@ const ToDoList = ({ todos, setTodos }: Props) => {
             </button>
             <button
               className="element-state-modifier task-edit"
-              onClick={(e) => {
-                handleEdit(todo.isDone);
+              onClick={() => {
+                handleEdit(todo.time);
               }}
             >
               <MdEditDocument />
             </button>
             <button
               className="element-state-modifier task-delete"
-              onClick={(e) => {
+              onClick={() => {
                 handleDelete(todo.time);
               }}
             >

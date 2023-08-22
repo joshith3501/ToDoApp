@@ -4,6 +4,8 @@ import InputField from "./components/InputField";
 import ToDoList from "./components/ToDoList";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import  { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 
 interface TodoProp {
   task: string;
@@ -29,6 +31,10 @@ function App() {
     }
   }, [theme]);
 
+  useEffect (() => {
+    console.log(todos);
+  }, [todos]);
+
   const handleThemeClick = () => {
     setTheme(!theme);
   };
@@ -48,11 +54,14 @@ function App() {
       <div className="header">
         <h1 className="main-heading">Let's pile up those Tasks!</h1>
         <div className="theme-toggle-container">
-          <MdOutlineDarkMode color={color}/>
+          {/* <MdOutlineDarkMode color={color}/> */}
+          <FontAwesomeIcon icon={faMoon} className="dark-mode-icon"/>
+          <i className="fa-solid fa-user"></i> 
           <button className="theme-toggler" onClick={handleThemeClick}>
             <div className="switch"></div>
           </button>
-          <CiLight color={color}/>
+          {/* <CiLight color={color}/> */}
+          <FontAwesomeIcon icon={faSun} className="light-mode-icon" />
         </div>
       </div>
       <InputField setTodo={setTodo} onSubmit={handleSubmit} />

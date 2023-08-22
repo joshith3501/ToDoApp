@@ -24,8 +24,8 @@
 }
 
 .dark-mode {
-  --clr-two: 	hsl(35, 58%, 94%);
-  --clr-one: 	hsl(34, 45%, 85%);
+  --clr-two: hsl(34, 45%, 85%);
+  --clr-one: 	hsl(35, 58%, 94%);
   --secondary-clr: 	hsl(32, 43%, 75%);
   --primary-clr: 	hsl(216, 69%, 20%);
 }
