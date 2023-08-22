@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import './../styles/inputfield.css';
 
 interface Prop {
   setTodo: React.Dispatch<React.SetStateAction<string>>;

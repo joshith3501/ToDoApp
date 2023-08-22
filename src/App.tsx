@@ -2,16 +2,10 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import InputField from "./components/InputField";
 import ToDoList from "./components/ToDoList";
-import { MdOutlineDarkMode } from "react-icons/md";
-import { CiLight } from "react-icons/ci";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import  { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import TodoProp from './components/TodoProp';
 
-interface TodoProp {
-  task: string;
-  time: number;
-  isDone: boolean;
-}
 
 function App() {
   let [mode, setMode] = useState("app-container");
@@ -44,7 +38,7 @@ function App() {
     if (todo === "") {
       console.log("no value entered");
     } else {
-      setTodos([...todos, { task: todo, time: Date.now(), isDone: false }]);
+      setTodos([...todos, { task: todo, time: Date.now(), isDone: false, isEdit: false }]);
       setTodo("");
     }
   };
