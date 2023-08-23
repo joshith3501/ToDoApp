@@ -24,6 +24,22 @@
   -webkit-text-size-adjust: 100%;
 }
 
+::-webkit-scrollbar {
+  background:none;
+  width:0.5rem;
+}
+::-webkit-scrollbar-thumb {
+
+  border-radius:100vw;
+  background-color: var(--clr-two);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing:border-box;
+}
+
 .dark-mode {
   --clr-two: hsl(34, 45%, 85%);
   --clr-one: 	hsl(35, 58%, 94%);

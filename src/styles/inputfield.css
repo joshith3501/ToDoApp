@@ -7,7 +7,7 @@
 }
 
 .add-input {
-  width: clamp(30rem, 40%, 40rem);
+  width: clamp(20rem, 5vw, 40rem);
   padding: 1rem;
   font-size: 1em;
   border: none;

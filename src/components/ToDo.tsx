@@ -1,4 +1,7 @@
 import TodoProp from "./TodoProp";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   todo: TodoProp;
@@ -7,17 +10,44 @@ interface Props {
 }
 
 const ToDo = ({ todo, todos, setTodos }: Props) => {
+
+  const [value, setValue] = useState(todo.task);
+
+  // useEffect(() => {
+  //   let modifierTodo = todos.map((t) => {
+  //     return t.time === todo.time ?  {...t, isEdit: todo.isEdit} : t;
+  //   })
+  //   setTodos(modifierTodo);
+  // }, [todo.isEdit])
+
+
+  const handleEditSubmit = (e: number) => {
+    let modifierTodo =todos.map((todo) => {
+      return todo.time === e ? {...todo, task: value, isEdit: !todo.isEdit} : todo;
+    })
+    setTodos(modifierTodo);
+    setValue(todo.task);
+  }
+
+
+
+
   const handleComplete = (e: number) => {
     let modifierTodo = todos.map((todo) => {
-      if (todo.time === e) {
-        if (todo.isDone) {
-          return { ...todo, isDone: false };
-        }
-        return { ...todo, isDone: true };
-      }
-      return todo;
+      return todo.time === e ? {...todo, isDone: !todo.isDone} : todo;
     });
     setTodos(modifierTodo);
+  };
+
+  const handleEdit = (e: number) => {
+    let modifierTodo = todos.map((todo) => {
+      if(todo.time === e) {
+        todo.isEdit = !todo.isEdit;
+      }
+      return todo;
+    })
+    setTodos(modifierTodo);
+    // todo.isEdit = !todo.isEdit;
   };
 
   const handleDelete = (e: number) => {
@@ -33,17 +63,17 @@ const ToDo = ({ todo, todos, setTodos }: Props) => {
             className="edit-form"
             onSubmit={(e) => {
               e.preventDefault();
-              // handleFormSubmit(todo.time);
-              // setIsEdit(false);
+              handleEditSubmit(todo.time);
+              // todo.isEdit = false;
             }}
           >
-            <input
+            <textarea
               defaultValue={todo.task}
               className="edit-form-input"
               onChange={(e) => {
-                // setValue(e.target.value);
+                setValue(e.target.value);
               }}
-            ></input>
+            ></textarea>
             <button className="edit-form-submit" type="submit">
               done
             </button>
@@ -62,15 +92,15 @@ const ToDo = ({ todo, todos, setTodos }: Props) => {
             handleComplete(todo.time);
           }}
         >
-          complete
+          <FontAwesomeIcon icon={faCheck} />
         </button>
         <button
           className="element-state-modifier task-edit"
           onClick={() => {
-            // handleEdit(todo.time);
+            handleEdit(todo.time);
           }}
         >
-          edit
+          <FontAwesomeIcon icon={faPenToSquare} />
         </button>
         <button
           className="element-state-modifier task-delete"
@@ -78,7 +108,7 @@ const ToDo = ({ todo, todos, setTodos }: Props) => {
             handleDelete(todo.time);
           }}
         >
-          delete
+          <FontAwesomeIcon icon={faTrash}/>
         </button>
       </aside>
     </article>

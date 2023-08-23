@@ -10,18 +10,16 @@ import TodoProp from './components/TodoProp';
 function App() {
   let [mode, setMode] = useState("app-container");
   let [theme, setTheme] = useState(false);
-  let [color, setColor] = useState("black");
   let [todo, setTodo] = useState<string>("");
   let [todos, setTodos] = useState<TodoProp[]>([]);
-  // let arr: (TodoProp | string)[];
 
   useEffect(() => {
     if (theme) {
       setMode("app-container dark-mode");
-      setColor("beige")
+      // setColor("beige")
     } else {
       setMode("app-container");
-      setColor("black");
+      // setColor("black");
     }
   }, [theme]);
 
@@ -48,13 +46,11 @@ function App() {
       <div className="header">
         <h1 className="main-heading">Let's pile up those Tasks!</h1>
         <div className="theme-toggle-container">
-          {/* <MdOutlineDarkMode color={color}/> */}
           <FontAwesomeIcon icon={faMoon} className="dark-mode-icon"/>
           <i className="fa-solid fa-user"></i> 
           <button className="theme-toggler" onClick={handleThemeClick}>
             <div className="switch"></div>
           </button>
-          {/* <CiLight color={color}/> */}
           <FontAwesomeIcon icon={faSun} className="light-mode-icon" />
         </div>
       </div>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import TodoProp from "./TodoProp";
 import ToDo from "./ToDo";
 interface Props {
@@ -11,8 +10,8 @@ const ToDoList = ({ todos, setTodos }: Props) => {
 
   return (
     <section className="list-container">
-      {todos.map((todo, index) => (
-        <ToDo todo={todo} todos={todos} setTodos={setTodos} />
+      {todos.map((todo) => (
+        <ToDo todo={todo} todos={todos} setTodos={setTodos} key={todo.time}/>
       ))}
     </section>
   );

@@ -56,7 +56,7 @@
 
 
 .list-container {
-  width: 90%;
+  width: 85%;
   /* border: 0.1rem solid black; */
   margin-top:1rem;
   display:grid;
@@ -89,16 +89,10 @@
 }
 
 .element-description {
-  overflow-y: scroll;
-  scroll-snap-type: proximity;
+  overflow-y:scroll;
+  height: max(100%);
 }
 
-.element-description::-webkit-scrollbar {
-  background: none;
-}
-.element-description::-webkit-scrollbar-thumb{
-  color:var(--primary-clr);
-}
 
 
 
@@ -149,13 +143,16 @@
 
 .edit-form {
   width:100%;
-  overflow:hidden;
   position:relative;
 
 }
 
 .edit-form-input {
-  width:100%;
+  max-width:100%;
+  height: minmax(20%,60%);
+  outline:none;
+  border:none;
+  background-color:var(--secondary-clr);
 }
 
 .dark-mode {
